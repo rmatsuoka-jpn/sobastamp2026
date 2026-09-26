@@ -40,7 +40,7 @@ function renderSchedule(vm){
   }else{$("#nextTitle").textContent="全ルート完了";$("#nextStores").textContent="おつかれさまでした！";$("#nextDate").textContent="COMPLETE"}
   $("#scheduleList").innerHTML=items.map(r=>{
     const done=routeDone(r,vm),names=r.storeIds.map(id=>storeById(id)?.name).filter(Boolean).join(" / ");
-    return `<div class="schedule-item ${done?"done":""}">
+    return `<div class="schedule-item ${done?"done":""}" data-route-id="${r.id}" tabindex="0" role="button" aria-label="${r.title}の店舗を表示">
       <div class="route-no">${r.id}</div><div><div class="route-title">${r.title}</div><div class="route-stores">${names}</div></div>
       <div class="route-date"><b>${done?"完了":r.window}</b>${done?"訪問済み":(r.date?fmtDate(r.date):r.type)}</div>
     </div>`;
@@ -54,9 +54,11 @@ function renderAreas(vm){
   }).join("");
 }
 let currentFilter="all";
+let currentRouteStoreIds=null;
 function renderStores(vm){
   const q=($("#storeSearch")?.value||"").trim().toLowerCase();
   let list=stores.filter(s=>!q||[s.name,s.municipality,s.area].join(" ").toLowerCase().includes(q));
+  if(currentRouteStoreIds) list=list.filter(s=>currentRouteStoreIds.includes(s.id));
   if(currentFilter==="visited")list=list.filter(s=>vm.has(s.id));
   if(currentFilter==="unvisited")list=list.filter(s=>!vm.has(s.id));
   $("#storeGrid").innerHTML=list.map(s=>{
@@ -83,7 +85,37 @@ function renderRecent(){
 }
 document.addEventListener("input",e=>{if(e.target.id==="storeSearch")renderStores(visitedMap())});
 document.addEventListener("click",e=>{
+  const route=e.target.closest("[data-route-id]");
+  if(route){
+    const r=schedule.find(x=>x.id===route.dataset.routeId);
+    if(r){
+      currentRouteStoreIds=[...r.storeIds];
+      currentFilter="all";
+      $("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
+      renderStores(visitedMap());
+      $("#storeSearch").value="";
+      const first=storeById(r.storeIds[0]);
+      if(first) selectStore(first.id);
+      $("#storeListTitle").textContent=r.id+" "+r.title+" の店舗";
+      $("#clearRoute").hidden=false;
+      $("#storesSection").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    return;
+  }
+  const clear=e.target.closest("#clearRoute");
+  if(clear){
+    currentRouteStoreIds=null;
+    $("#storeListTitle").textContent="43店舗一覧";
+    clear.hidden=true;
+    renderStores(visitedMap());
+    return;
+  }
   const b=e.target.closest("[data-filter]");if(!b)return;
-  currentFilter=b.dataset.filter;$$("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderStores(visitedMap());
+  currentFilter=b.dataset.filter;$("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderStores(visitedMap());
+});
+
+document.addEventListener("keydown",e=>{
+  const route=e.target.closest?.("[data-route-id]");
+  if(route && (e.key==="Enter"||e.key===" ")) { e.preventDefault(); route.click(); }
 });
 init().catch(err=>{console.error(err);document.body.insertAdjacentHTML("beforeend",'<p style="padding:20px">データの読み込みに失敗しました。</p>')});
