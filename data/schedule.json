@@ -1,0 +1,276 @@
+[
+  {
+    "id": "R01",
+    "order": 1,
+    "title": "北部① 古宇利",
+    "window": "10月前半",
+    "date": null,
+    "storeIds": [
+      1,
+      2
+    ],
+    "status": "planned",
+    "type": "1日"
+  },
+  {
+    "id": "R02",
+    "order": 2,
+    "title": "北部② 今帰仁・本部",
+    "window": "10月前半",
+    "date": null,
+    "storeIds": [
+      3,
+      4
+    ],
+    "status": "planned",
+    "type": "1日"
+  },
+  {
+    "id": "R03",
+    "order": 3,
+    "title": "北部③ 名護",
+    "window": "10月後半",
+    "date": null,
+    "storeIds": [
+      5,
+      6
+    ],
+    "status": "planned",
+    "type": "1日"
+  },
+  {
+    "id": "R04",
+    "order": 4,
+    "title": "宜野座・うるま北",
+    "window": "10月後半",
+    "date": null,
+    "storeIds": [
+      7,
+      8
+    ],
+    "status": "planned",
+    "type": "1日"
+  },
+  {
+    "id": "R05",
+    "order": 5,
+    "title": "うるま",
+    "window": "11月前半",
+    "date": null,
+    "storeIds": [
+      9,
+      10
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R06",
+    "order": 6,
+    "title": "沖縄市",
+    "window": "11月前半",
+    "date": null,
+    "storeIds": [
+      11,
+      12
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R07",
+    "order": 7,
+    "title": "嘉手納・北谷①",
+    "window": "11月前半",
+    "date": null,
+    "storeIds": [
+      13,
+      14
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R08",
+    "order": 8,
+    "title": "北谷②・北中城",
+    "window": "11月後半",
+    "date": null,
+    "storeIds": [
+      15,
+      16
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R09",
+    "order": 9,
+    "title": "宜野湾①",
+    "window": "11月後半",
+    "date": null,
+    "storeIds": [
+      17,
+      18
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R10",
+    "order": 10,
+    "title": "宜野湾②",
+    "window": "11月後半",
+    "date": null,
+    "storeIds": [
+      19,
+      20
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R11",
+    "order": 11,
+    "title": "宜野湾③",
+    "window": "12月前半",
+    "date": null,
+    "storeIds": [
+      21,
+      22
+    ],
+    "status": "planned",
+    "type": "半日"
+  },
+  {
+    "id": "R12",
+    "order": 12,
+    "title": "浦添①",
+    "window": "12月前半",
+    "date": null,
+    "storeIds": [
+      23,
+      24
+    ],
+    "status": "planned",
+    "type": "半日・リカバリー可"
+  },
+  {
+    "id": "R13",
+    "order": 13,
+    "title": "浦添②",
+    "window": "12月前半",
+    "date": null,
+    "storeIds": [
+      25,
+      26
+    ],
+    "status": "planned",
+    "type": "半日・リカバリー可"
+  },
+  {
+    "id": "R14",
+    "order": 14,
+    "title": "浦添③・西原",
+    "window": "12月後半",
+    "date": null,
+    "storeIds": [
+      27,
+      28
+    ],
+    "status": "planned",
+    "type": "半日・リカバリー可"
+  },
+  {
+    "id": "R15",
+    "order": 15,
+    "title": "那覇① 若狭・久米",
+    "window": "12月後半",
+    "date": null,
+    "storeIds": [
+      29,
+      30
+    ],
+    "status": "planned",
+    "type": "半日・平日可"
+  },
+  {
+    "id": "R16",
+    "order": 16,
+    "title": "那覇② 首里",
+    "window": "1月前半",
+    "date": null,
+    "storeIds": [
+      31,
+      33
+    ],
+    "status": "planned",
+    "type": "半日・平日可"
+  },
+  {
+    "id": "R17",
+    "order": 17,
+    "title": "那覇③ 三原・古島",
+    "window": "1月前半",
+    "date": null,
+    "storeIds": [
+      32,
+      34
+    ],
+    "status": "planned",
+    "type": "半日・平日可"
+  },
+  {
+    "id": "R18",
+    "order": 18,
+    "title": "那覇④ 牧志・久茂地",
+    "window": "1月前半",
+    "date": null,
+    "storeIds": [
+      35,
+      36
+    ],
+    "status": "planned",
+    "type": "半日・平日可"
+  },
+  {
+    "id": "R19",
+    "order": 19,
+    "title": "南風原・豊見城",
+    "window": "1月後半",
+    "date": null,
+    "storeIds": [
+      37,
+      38,
+      39
+    ],
+    "status": "planned",
+    "type": "半日〜1日"
+  },
+  {
+    "id": "R20",
+    "order": 20,
+    "title": "南城・八重瀬",
+    "window": "1月後半",
+    "date": null,
+    "storeIds": [
+      40,
+      41,
+      42
+    ],
+    "status": "planned",
+    "type": "1日"
+  },
+  {
+    "id": "R21",
+    "order": 21,
+    "title": "糸満・最終回収",
+    "window": "1月末〜2月",
+    "date": null,
+    "storeIds": [
+      43
+    ],
+    "status": "planned",
+    "type": "リカバリー"
+  }
+]
