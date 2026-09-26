@@ -20,7 +20,6 @@
     "date": null,
     "storeIds": [
       40,
-      41,
       42
     ],
     "status": "planned",
@@ -74,8 +73,7 @@
     "date": null,
     "storeIds": [
       7,
-      8,
-      9
+      8
     ],
     "status": "planned",
     "type": "1日"
@@ -88,7 +86,6 @@
     "date": null,
     "storeIds": [
       37,
-      40,
       41
     ],
     "status": "planned",
@@ -97,25 +94,26 @@
   {
     "id": "R08",
     "order": 8,
-    "title": "中部① 沖縄市",
+    "title": "中部① うるま・沖縄市",
     "window": "11月後半",
     "date": null,
     "storeIds": [
-      11,
-      12
+      9,
+      10,
+      11
     ],
     "status": "planned",
-    "type": "半日"
+    "type": "半日〜1日"
   },
   {
     "id": "R09",
     "order": 9,
-    "title": "中部② 嘉手納・北谷",
+    "title": "中部② 沖縄市・嘉手納",
     "window": "11月後半",
     "date": null,
     "storeIds": [
-      13,
-      14
+      12,
+      13
     ],
     "status": "planned",
     "type": "半日"
@@ -127,11 +125,12 @@
     "window": "11月後半",
     "date": null,
     "storeIds": [
+      14,
       15,
       16
     ],
     "status": "planned",
-    "type": "半日"
+    "type": "半日〜1日"
   },
   {
     "id": "R11",
@@ -227,12 +226,11 @@
   {
     "id": "R18",
     "order": 18,
-    "title": "西原＋近隣",
+    "title": "西原＋近隣回収",
     "window": "1月後半",
     "date": null,
     "storeIds": [
-      28,
-      10
+      28
     ],
     "status": "planned",
     "type": "半日・リカバリー可"
