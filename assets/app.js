@@ -79,6 +79,23 @@ function selectStore(id){
   $("#mapOpen").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s.name+" "+s.address);
   $("#mapPanel").scrollIntoView({behavior:"smooth",block:"center"});
 }
+function showRouteFocus(r){
+  const vm=visitedMap();
+  $("#routeFocus").hidden=false;
+  $("#routeFocusTitle").textContent=r.id+" "+r.title;
+  $("#routeFocusMeta").textContent=(r.date?fmtDate(r.date):r.window+"・日程未確定")+" / "+r.type;
+  $("#routeStopList").innerHTML=r.storeIds.map((id,idx)=>{
+    const s=storeById(id),v=vm.get(id);
+    if(!s)return "";
+    return `<div class="route-stop ${v?"visited":""}" data-stop-id="${s.id}">
+      <div class="stop-order">${idx+1}店目</div>
+      <div><div class="stop-name">${s.name}</div><div class="stop-meta">${s.municipality} · ${s.address}</div></div>
+      <div class="stop-action">${v?"訪問済み ✓":"地図を見る →"}</div>
+    </div>`;
+  }).join("");
+  $("#routeStopList [data-stop-id]").forEach(el=>el.addEventListener("click",()=>selectStore(Number(el.dataset.stopId))));
+}
+
 function renderRecent(){
   const list=[...visits].filter(v=>v.visitedDate).sort((a,b)=>b.visitedDate.localeCompare(a.visitedDate)).slice(0,4);
   $("#recent").innerHTML=list.length?list.map(v=>{const s=storeById(v.storeId);return `<div class="recent-item"><b>${s?.name||"店舗"}</b><span>${fmtDate(v.visitedDate)} · ${s?.municipality||""}</span></div>`;}).join(""):'<div class="recent-empty">まだ訪問記録はありません。訪問後にChatGPTへ「○○に行った」と伝えると、ここに反映します。</div>';
@@ -96,10 +113,16 @@ document.addEventListener("click",e=>{
       $("#storeSearch").value="";
       const first=storeById(r.storeIds[0]);
       if(first) selectStore(first.id);
+      showRouteFocus(r);
       $("#storeListTitle").textContent=r.id+" "+r.title+" の店舗";
       $("#clearRoute").hidden=false;
-      $("#storesSection").scrollIntoView({behavior:"smooth",block:"start"});
+      $("#routeFocus").scrollIntoView({behavior:"smooth",block:"center"});
     }
+    return;
+  }
+  const close=e.target.closest("#closeRouteFocus");
+  if(close){
+    $("#routeFocus").hidden=true;
     return;
   }
   const clear=e.target.closest("#clearRoute");
