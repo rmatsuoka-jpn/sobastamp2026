@@ -71,12 +71,29 @@ function renderStores(vm){
   }).join("");
   $$(".store-card").forEach(el=>el.addEventListener("click",()=>selectStore(Number(el.dataset.id))));
 }
+function buildDirectionsUrl(storeIds){
+  const routeStores=storeIds.map(storeById).filter(Boolean);
+  if(routeStores.length<2)return null;
+  const origin=routeStores[0];
+  const destination=routeStores[routeStores.length-1];
+  const waypoints=routeStores.slice(1,-1);
+  const p=new URLSearchParams({
+    api:"1",
+    origin:origin.name+" "+origin.address,
+    destination:destination.name+" "+destination.address,
+    travelmode:"driving"
+  });
+  if(waypoints.length) p.set("waypoints",waypoints.map(s=>s.name+" "+s.address).join("|"));
+  return "https://www.google.com/maps/dir/?"+p.toString();
+}
+
 function selectStore(id){
   const s=storeById(id);if(!s)return;
   $("#mapTitle").textContent=s.name;
   $("#mapSub").textContent=s.address;
   $("#mapFrame").src="https://www.google.com/maps?q="+encodeURIComponent(s.name+" "+s.address)+"&output=embed";
   $("#mapOpen").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s.name+" "+s.address);
+  const lbl=$("#mapOpenLabel"); if(lbl) lbl.textContent="Googleマップ ↗";
   $("#mapPanel").scrollIntoView({behavior:"smooth",block:"center"});
 }
 function showRouteFocus(r){
@@ -113,6 +130,11 @@ document.addEventListener("click",e=>{
       $("#storeSearch").value="";
       const first=storeById(r.storeIds[0]);
       if(first) selectStore(first.id);
+      const dirUrl=buildDirectionsUrl(r.storeIds);
+      if(dirUrl){
+        $("#mapOpen").href=dirUrl;
+        const lbl=$("#mapOpenLabel"); if(lbl) lbl.textContent="このルートをGoogleマップで開く ↗";
+      }
       showRouteFocus(r);
       $("#storeListTitle").textContent=r.id+" "+r.title+" の店舗";
       $("#clearRoute").hidden=false;
