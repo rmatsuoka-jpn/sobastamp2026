@@ -93,7 +93,7 @@ function showRouteFocus(r){
       <div class="stop-action">${v?"訪問済み ✓":"地図を見る →"}</div>
     </div>`;
   }).join("");
-  $("#routeStopList [data-stop-id]").forEach(el=>el.addEventListener("click",()=>selectStore(Number(el.dataset.stopId))));
+  document.querySelectorAll("#routeStopList [data-stop-id]").forEach(el=>el.addEventListener("click",()=>selectStore(Number(el.dataset.stopId))));
 }
 
 function renderRecent(){
@@ -108,7 +108,7 @@ document.addEventListener("click",e=>{
     if(r){
       currentRouteStoreIds=[...r.storeIds];
       currentFilter="all";
-      $("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
+      document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
       renderStores(visitedMap());
       $("#storeSearch").value="";
       const first=storeById(r.storeIds[0]);
@@ -134,7 +134,7 @@ document.addEventListener("click",e=>{
     return;
   }
   const b=e.target.closest("[data-filter]");if(!b)return;
-  currentFilter=b.dataset.filter;$("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderStores(visitedMap());
+  currentFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderStores(visitedMap());
 });
 
 document.addEventListener("keydown",e=>{
