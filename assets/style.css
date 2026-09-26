@@ -71,3 +71,10 @@ h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.3rem 0 .7rem}
 .stop-meta{font-size:.8rem;color:var(--muted);margin-top:3px}
 .stop-action{font-size:.78rem;color:var(--green);font-weight:800}
 @media(max-width:600px){.route-focus-head{display:block}.route-focus-head #closeRouteFocus{margin-top:8px}.route-stop{grid-template-columns:48px 1fr}.stop-action{grid-column:2}}
+
+.route-focus-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.route-map-link{background:var(--green);color:#fff;border-color:var(--green);text-decoration:none;font-weight:800}
+.route-map-link:hover{filter:brightness(.96)}
+@media(max-width:600px){
+  .route-focus-actions{justify-content:flex-start;margin-top:10px}
+}
