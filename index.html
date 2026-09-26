@@ -110,16 +110,17 @@
       <div class="recent" id="recent"></div>
     </section>
 
-    <section class="section">
+    <section class="section" id="storesSection">
       <div class="section-head">
         <div>
-          <h2>43店舗一覧</h2>
+          <h2 id="storeListTitle">43店舗一覧</h2>
           <p>公式の第16回参加店舗をベースにしています。</p>
         </div>
       </div>
       <div class="tools">
         <input class="search" id="storeSearch" type="search" placeholder="店舗名・市町村で検索">
         <button class="filter active" data-filter="all">すべて</button>
+        <button class="filter" id="clearRoute" hidden>ルート絞り込み解除</button>
         <button class="filter" data-filter="unvisited">未訪問</button>
         <button class="filter" data-filter="visited">訪問済み</button>
       </div>
