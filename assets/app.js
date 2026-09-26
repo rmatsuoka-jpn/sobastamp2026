@@ -132,8 +132,7 @@ document.addEventListener("click",e=>{
       if(first) selectStore(first.id);
       const dirUrl=buildDirectionsUrl(r.storeIds);
       if(dirUrl){
-        $("#mapOpen").href=dirUrl;
-        const lbl=$("#mapOpenLabel"); if(lbl) lbl.textContent="このルートをGoogleマップで開く ↗";
+        $("#routeMapOpen").href=dirUrl;
       }
       showRouteFocus(r);
       $("#storeListTitle").textContent=r.id+" "+r.title+" の店舗";
@@ -145,6 +144,7 @@ document.addEventListener("click",e=>{
   const close=e.target.closest("#closeRouteFocus");
   if(close){
     $("#routeFocus").hidden=true;
+    $("#routeMapOpen").href="#";
     return;
   }
   const clear=e.target.closest("#clearRoute");
