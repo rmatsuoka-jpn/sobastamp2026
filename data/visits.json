@@ -1,5 +1,10 @@
 [
   {
+    "storeId": 11,
+    "visitedDate": "2026-10-18",
+    "menu": "カレーそば"
+  },
+  {
     "storeId": 13,
     "visitedDate": "2026-10-09",
     "menu": "伝説のベーラーそば"
