@@ -1,5 +1,15 @@
 [
   {
+    "storeId": 1,
+    "visitedDate": "2026-11-03",
+    "menu": "今帰仁トマトそば"
+  },
+  {
+    "storeId": 2,
+    "visitedDate": "2026-11-03",
+    "menu": "肉なしゆし豆腐そば"
+  },
+  {
     "storeId": 11,
     "visitedDate": "2026-10-18",
     "menu": "カレーそば"
