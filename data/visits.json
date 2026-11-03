@@ -2,12 +2,18 @@
   {
     "storeId": 1,
     "visitedDate": "2026-11-03",
-    "menu": "今帰仁トマトそば"
+    "menu": "今帰仁トマトそば",
+    "photos": [
+      "images/visits/2026-11-03_sorahashi.svg"
+    ]
   },
   {
     "storeId": 2,
     "visitedDate": "2026-11-03",
-    "menu": "肉なしゆし豆腐そば"
+    "menu": "肉なしゆし豆腐そば",
+    "photos": [
+      "images/visits/2026-11-03_shimanokakurega.svg"
+    ]
   },
   {
     "storeId": 11,
