@@ -128,7 +128,8 @@ function showRouteFocus(r){
 }
 
 function renderRecent(){
-  const list=[...visits].filter(v=>v.visitedDate).sort((a,b)=>b.visitedDate.localeCompare(a.visitedDate)).slice(0,12);
+  const list=[...visits].filter(v=>v.visitedDate).sort((a,b)=>b.visitedDate.localeCompare(a.visitedDate));
+  $("#albumCount").textContent=list.length+"件";
   $("#recent").innerHTML=list.length?list.map(v=>{
     const s=storeById(v.storeId),photo=v.photos?.[0],title=s?.name||"店舗";
     return `<article class="recent-item">
