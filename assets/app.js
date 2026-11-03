@@ -63,11 +63,11 @@ function renderSchedule(vm){
     return `<div class="schedule-item ${done?"done":""}" data-route-id="${r.id}" tabindex="0" role="button" aria-label="${r.title}の店舗を表示">
       <div class="route-no">${r.id}</div>
       <div><div class="route-title">${r.title}</div><div class="route-stores">${names}</div></div>
-      <div class="route-date"><b>${done?"完了":r.window}</b>${done?"訪問済み":(r.date?fmtDate(r.date):r.type)}</div>
+      <div class="route-date"><b>${done?(r.date?fmtDate(r.date)+" 完了":"完了"):r.window}</b>${done?"訪問済み":(r.date?fmtDate(r.date):r.type)}</div>
     </div>`;
   };
   const sectionHTML=(label,routes,kind)=>routes.length
-    ? `<div class="schedule-group-heading ${kind}"><span>${label}</span><span>${routes.length}ルート</span></div>`+routes.map(routeHTML).join("")
+    ? `<div class="schedule-group-heading ${kind}"><span>${label}</span><span>${routes.length}${kind==="completed"?"記録":"ルート"}</span></div>`+routes.map(routeHTML).join("")
     : "";
   $("#scheduleList").innerHTML=
     sectionHTML("これからのルート",pending,"pending")+
@@ -102,7 +102,11 @@ function renderStores(vm){
 }
 function buildDirectionsUrl(storeIds){
   const routeStores=storeIds.map(storeById).filter(Boolean);
-  if(routeStores.length<2)return null;
+  if(routeStores.length===0)return null;
+  if(routeStores.length===1){
+    const s=routeStores[0];
+    return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s.name+" "+s.address);
+  }
   const origin=routeStores[0];
   const destination=routeStores[routeStores.length-1];
   const waypoints=routeStores.slice(1,-1);
@@ -201,8 +205,13 @@ document.addEventListener("click",e=>{
       const first=storeById(r.storeIds[0]);
       if(first) selectStore(first.id);
       const dirUrl=buildDirectionsUrl(r.storeIds);
+      const routeLink=$("#routeMapOpen");
       if(dirUrl){
-        $("#routeMapOpen").href=dirUrl;
+        routeLink.href=dirUrl;
+        routeLink.textContent=r.storeIds.length===1?"この店舗をGoogleマップで開く ↗":"このルートをGoogleマップで開く ↗";
+        routeLink.hidden=false;
+      }else{
+        routeLink.hidden=true;
       }
       showRouteFocus(r);
       $("#storeListTitle").textContent=r.id+" "+r.title+" の店舗";
