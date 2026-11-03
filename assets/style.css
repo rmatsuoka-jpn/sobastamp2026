@@ -178,3 +178,37 @@ h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.3rem 0 .7rem}
   .area-body{padding:0 12px 15px}
   .area-body .area-map{gap:9px}
 }
+
+/* Display upcoming routes before completed ones, while retaining their route IDs. */
+.schedule-group-heading{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:7px 6px 2px;font-size:.78rem;font-weight:800;color:var(--green);
+}
+.schedule-group-heading.completed{
+  padding-top:15px;border-top:1px solid var(--line);color:var(--muted);
+}
+.schedule-item.done{opacity:.82}
+
+/* Mobile-first summary: ring at left and result at right. */
+@media(max-width:600px){
+  .progress-card{
+    flex-direction:row;align-items:center;text-align:left;
+    padding:16px;gap:16px;border-radius:18px;
+  }
+  .ring{flex:0 0 96px;width:96px;height:96px}
+  .ring:before{inset:10px}
+  .ring .inside strong{font-size:1.45rem}
+  .ring .inside span{font-size:.68rem}
+  .progress-copy{min-width:0;flex:1}
+  .progress-copy h2{font-size:1rem;margin:0 0 5px}
+  .progress-copy .big{font-size:1.9rem;line-height:1.12;white-space:nowrap}
+  .progress-copy .big span{font-size:.86rem}
+  #progressText{font-size:.82rem;margin-top:5px}
+}
+@media(max-width:360px){
+  .progress-card{padding:12px;gap:12px}
+  .ring{flex-basis:84px;width:84px;height:84px}
+  .ring:before{inset:9px}
+  .ring .inside strong{font-size:1.25rem}
+  .progress-copy .big{font-size:1.6rem}
+}
