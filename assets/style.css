@@ -134,3 +134,47 @@ h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.3rem 0 .7rem}
   .album-summary-right{gap:7px}
   .album-body{padding:0 10px 12px}
 }
+
+/* Compact two-stat dashboard; PLAN was removed. */
+.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{min-width:0;padding:14px 18px}
+.stat .value{font-size:1.45rem}
+.stat .sub{font-size:.78rem}
+
+/* Municipality progress: collapsed immediately below overall progress. */
+.area-section{margin-top:14px}
+.area-disclosure{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:20px;box-shadow:var(--shadow);overflow:hidden;
+}
+.area-summary{
+  list-style:none;display:flex;justify-content:space-between;
+  align-items:center;gap:14px;padding:17px 20px;cursor:pointer;
+}
+.area-summary::-webkit-details-marker{display:none}
+.area-summary:hover{background:#f6f9f6}
+.area-summary:focus-visible{outline:3px solid var(--green2);outline-offset:-4px;border-radius:18px}
+.area-summary-heading{display:grid;gap:2px;min-width:0}
+.area-summary-title{font-size:1.13rem;font-weight:850;line-height:1.4}
+.area-summary-desc{font-size:.85rem;color:var(--muted)}
+.area-summary-chevron{flex:0 0 auto;color:var(--green);font-size:1.7rem;line-height:1;transition:transform .2s}
+.area-disclosure[open] .area-summary-chevron{transform:rotate(180deg)}
+.area-body{padding:0 20px 20px}
+.area-body .area-map{max-width:790px;gap:11px}
+
+/* The store map no longer shares the space with the municipality bars. */
+#mapPanel .panel{max-width:100%}
+
+@media(max-width:600px){
+  .dashboard{gap:10px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .stat{padding:12px 13px;border-radius:16px}
+  .stat .label{font-size:.72rem}
+  .stat .value{font-size:1.4rem;margin-top:1px;line-height:1.3}
+  .stat .sub{font-size:.72rem;margin-top:1px}
+  .area-summary{padding:14px 15px}
+  .area-summary-title{font-size:1.07rem}
+  .area-summary-desc{font-size:.78rem}
+  .area-body{padding:0 12px 15px}
+  .area-body .area-map{gap:9px}
+}
