@@ -94,3 +94,14 @@ h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.3rem 0 .7rem}
 .photo-close{position:absolute;right:14px;top:14px;border:0;background:#fff;color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:1.5rem;cursor:pointer;box-shadow:0 2px 12px #0004}
 @media(max-width:900px){.recent{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.recent{grid-template-columns:repeat(2,minmax(0,1fr))}.store-photo{height:115px}.recent-item{padding:8px}}
+
+/* Manual data refresh control */
+.hero-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1}
+.refresh-button{display:inline-flex;align-items:center;gap:6px;border:1px solid #c3d6c9;border-radius:999px;padding:9px 16px;color:var(--green);background:#fff;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 4px 12px rgba(37,61,49,.08)}
+.refresh-button:hover{background:#edf6ef}
+.refresh-button:disabled{cursor:progress;opacity:.65}
+.refresh-icon{font-size:1.45rem;line-height:.75}
+.refresh-status{display:block;margin-top:3px;font-size:.8rem;color:var(--green);position:relative;z-index:1}
+.refresh-status:empty{display:none}
+.refresh-status.refresh-error{color:#a94136}
+@media(max-width:600px){.hero-topline{align-items:flex-start}.refresh-button{padding:8px 12px;font-size:.9rem}}
