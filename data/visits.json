@@ -18,11 +18,17 @@
   {
     "storeId": 11,
     "visitedDate": "2026-10-18",
-    "menu": "カレーそば"
+    "menu": "カレーそば",
+    "photos": [
+      "images/visits/2026-10-18_nankuru796.avif"
+    ]
   },
   {
     "storeId": 13,
     "visitedDate": "2026-10-09",
-    "menu": "伝説のベーラーそば"
+    "menu": "伝説のベーラーそば",
+    "photos": [
+      "images/visits/2026-10-09_miyoya.avif"
+    ]
   }
 ]
