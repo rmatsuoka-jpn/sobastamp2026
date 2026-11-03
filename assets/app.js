@@ -43,21 +43,37 @@ function renderTiming(){
 }
 function routeDone(r,vm){return r.storeIds.every(id=>vm.has(id))}
 function renderSchedule(vm){
+  // Data order is preserved; completion only affects the visual grouping.
   const items=[...schedule].sort((a,b)=>a.order-b.order);
-  const next=items.find(r=>!routeDone(r,vm));
+  const pending=items.filter(r=>!routeDone(r,vm));
+  const completed=items.filter(r=>routeDone(r,vm));
+  const next=pending[0];
   if(next){
     $("#nextTitle").textContent=next.title;
     $("#nextStores").textContent=next.storeIds.map(id=>storeById(id)?.name).filter(Boolean).join(" → ");
     $("#nextDate").textContent=next.date?fmtDate(next.date):next.window+"・日程未確定";
-  }else{$("#nextTitle").textContent="全ルート完了";$("#nextStores").textContent="おつかれさまでした！";$("#nextDate").textContent="COMPLETE"}
-  $("#scheduleList").innerHTML=items.map(r=>{
-    const done=routeDone(r,vm),names=r.storeIds.map(id=>storeById(id)?.name).filter(Boolean).join(" / ");
+  }else{
+    $("#nextTitle").textContent="全ルート完了";
+    $("#nextStores").textContent="おつかれさまでした！";
+    $("#nextDate").textContent="COMPLETE";
+  }
+  const routeHTML=r=>{
+    const done=routeDone(r,vm);
+    const names=r.storeIds.map(id=>storeById(id)?.name).filter(Boolean).join(" / ");
     return `<div class="schedule-item ${done?"done":""}" data-route-id="${r.id}" tabindex="0" role="button" aria-label="${r.title}の店舗を表示">
-      <div class="route-no">${r.id}</div><div><div class="route-title">${r.title}</div><div class="route-stores">${names}</div></div>
+      <div class="route-no">${r.id}</div>
+      <div><div class="route-title">${r.title}</div><div class="route-stores">${names}</div></div>
       <div class="route-date"><b>${done?"完了":r.window}</b>${done?"訪問済み":(r.date?fmtDate(r.date):r.type)}</div>
     </div>`;
-  }).join("");
+  };
+  const sectionHTML=(label,routes,kind)=>routes.length
+    ? `<div class="schedule-group-heading ${kind}"><span>${label}</span><span>${routes.length}ルート</span></div>`+routes.map(routeHTML).join("")
+    : "";
+  $("#scheduleList").innerHTML=
+    sectionHTML("これからのルート",pending,"pending")+
+    sectionHTML("完了済み",completed,"completed");
 }
+
 function renderAreas(vm){
   const order=["今帰仁村","本部町","名護市","宜野座村","うるま市","沖縄市","嘉手納町","北谷町","北中城村","宜野湾市","浦添市","西原町","那覇市","南風原町","豊見城市","南城市","八重瀬町","糸満市"];
   $("#areaMap").innerHTML=order.map(m=>{
