@@ -65,6 +65,7 @@ function renderStores(vm){
     const v=vm.get(s.id);
     return `<article class="store-card ${v?"visited":""}" data-id="${s.id}">
       <div class="store-top"><span class="store-no">#${String(s.id).padStart(2,"0")} · ${s.municipality}</span><span class="check">${v?"✓":"○"}</span></div>
+      ${v?.photos?.[0]?`<img class="store-photo" src="./${v.photos[0]}" alt="${s.name}の訪問写真" loading="lazy">`:""}
       <div class="store-name">${s.name}</div><div class="store-meta">${s.address}</div>
       ${v?`<div class="visited-date">訪問：${fmtDate(v.visitedDate)}</div>`:""}
     </article>`;
@@ -114,11 +115,34 @@ function showRouteFocus(r){
 }
 
 function renderRecent(){
-  const list=[...visits].filter(v=>v.visitedDate).sort((a,b)=>b.visitedDate.localeCompare(a.visitedDate)).slice(0,4);
-  $("#recent").innerHTML=list.length?list.map(v=>{const s=storeById(v.storeId);return `<div class="recent-item"><b>${s?.name||"店舗"}</b><span>${fmtDate(v.visitedDate)} · ${s?.municipality||""}</span></div>`;}).join(""):'<div class="recent-empty">まだ訪問記録はありません。訪問後にChatGPTへ「○○に行った」と伝えると、ここに反映します。</div>';
+  const list=[...visits].filter(v=>v.visitedDate).sort((a,b)=>b.visitedDate.localeCompare(a.visitedDate)).slice(0,12);
+  $("#recent").innerHTML=list.length?list.map(v=>{
+    const s=storeById(v.storeId),photo=v.photos?.[0],title=s?.name||"店舗";
+    return `<article class="recent-item">
+      ${photo?`<button type="button" class="photo-preview" data-photo-store="${v.storeId}" aria-label="${title}の写真を拡大">
+        <img src="./${photo}" alt="${title}で食べた${v.menu||"沖縄そば"}" loading="lazy"></button>`:""}
+      <b>${title}</b>
+      <span>${fmtDate(v.visitedDate)} · ${s?.municipality||""}</span>
+      ${v.menu?`<span class="recent-menu">🍜 ${v.menu}</span>`:""}
+    </article>`;
+  }).join(""):'<div class="recent-empty">まだ訪問記録はありません。</div>';
 }
+function openPhoto(storeId){
+  const v=visits.find(x=>x.storeId===storeId);
+  const photo=v?.photos?.[0]; if(!photo)return;
+  const s=storeById(storeId);
+  const dlg=$("#photoDialog");
+  $("#photoLarge").src="./"+photo;
+  $("#photoLarge").alt=(s?.name||"店舗")+"の訪問写真";
+  $("#photoCaption").textContent=(s?.name||"")+"　"+(v.menu||"")+"　"+fmtDate(v.visitedDate);
+  if(!dlg.open)dlg.showModal();
+}
+
 document.addEventListener("input",e=>{if(e.target.id==="storeSearch")renderStores(visitedMap())});
 document.addEventListener("click",e=>{
+  const photo=e.target.closest("[data-photo-store]");
+  if(photo){openPhoto(Number(photo.dataset.photoStore));return;}
+  if(e.target.closest("#closePhoto")){$("#photoDialog").close();return;}
   const route=e.target.closest("[data-route-id]");
   if(route){
     const r=schedule.find(x=>x.id===route.dataset.routeId);
@@ -164,3 +188,7 @@ document.addEventListener("keydown",e=>{
   if(route && (e.key==="Enter"||e.key===" ")) { e.preventDefault(); route.click(); }
 });
 init().catch(err=>{console.error(err);document.body.insertAdjacentHTML("beforeend",'<p style="padding:20px">データの読み込みに失敗しました。</p>')});
+
+$("#photoDialog").addEventListener("click",e=>{
+  if(e.target===$("#photoDialog")) $("#photoDialog").close();
+});
