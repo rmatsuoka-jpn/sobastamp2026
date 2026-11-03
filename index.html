@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="第16回沖縄そばスタンプラリー全43店舗を巡る個人ダッシュボード">
   <title>私の沖縄そばスタンプラリーマップ 2026</title>
-  <link rel="stylesheet" href="./assets/style.css?v=20261103-album1">
+  <link rel="stylesheet" href="./assets/style.css?v=20261103-mobile-summary1">
 </head>
 <body>
   <main class="shell">
     <section class="hero">
       <div class="hero-topline"><div class="eyebrow">MY OKINAWA SOBA STAMP RALLY</div><button class="refresh-button" id="refreshButton" type="button" aria-label="最新データに更新"><span class="refresh-icon" aria-hidden="true">↻</span> 更新</button></div><span id="refreshStatus" class="refresh-status" role="status" aria-live="polite"></span>
       <h1>私の沖縄そば<br>スタンプラリーマップ</h1>
-      <p>第16回「そばじょーぐーへの道」全43店舗制覇を目指す、個人用の攻略ダッシュボード。予定は流動的に組み替え、訪問実績はChatGPT経由で更新します。</p>
+      <p>第16回「そばじょーぐーへの道」全43店舗制覇を目指す、個人用の攻略ダッシュボード。</p>
       <div class="event-meta">
         <span class="pill">📅 2026.10.01 → 2027.02.28</span>
         <span class="pill">🍜 全43店舗</span>
@@ -43,12 +43,22 @@
           <div class="value" id="remainingCount">43</div>
           <div class="sub">残り店舗</div>
         </div>
-        <div class="stat">
-          <div class="label">PLAN</div>
-          <div class="value">21</div>
-          <div class="sub">休日攻略枠（初期案）</div>
-        </div>
       </div>
+    </section>
+
+    <section class="section area-section" id="areaSection">
+      <details class="area-disclosure" id="areaDisclosure">
+        <summary class="area-summary">
+          <span class="area-summary-heading">
+            <span class="area-summary-title">市町村別の達成率</span>
+            <span class="area-summary-desc">地域ごとの訪問状況を見る</span>
+          </span>
+          <span class="area-summary-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="area-body">
+          <div class="area-map" id="areaMap"></div>
+        </div>
+      </details>
     </section>
 
     <section class="section">
@@ -88,29 +98,24 @@
     <section class="section" id="mapPanel">
       <div class="section-head">
         <div>
-          <h2>沖縄縦断マップ</h2>
-          <p>左は市町村別進捗、右は選択した店舗の実地図です。</p>
+          <h2>店舗マップ</h2>
+          <p>選択した店舗の場所を地図で確認できます。</p>
         </div>
       </div>
-      <div class="map-layout">
-        <div class="panel">
-          <div class="area-map" id="areaMap"></div>
-        </div>
-        <div class="panel">
-          <div class="section-head" style="margin-bottom:10px">
-            <div>
-              <h2 id="mapTitle" style="font-size:1.05rem">店舗を選択してください</h2>
-              <p id="mapSub">下の店舗一覧をクリックすると地図を表示します。</p>
-            </div>
-            <a class="pill" id="mapOpen" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C" target="_blank" rel="noopener"><span id="mapOpenLabel">Googleマップ ↗</span></a>
+      <div class="panel">
+        <div class="section-head" style="margin-bottom:10px">
+          <div>
+            <h2 id="mapTitle" style="font-size:1.05rem">店舗を選択してください</h2>
+            <p id="mapSub">下の店舗一覧をクリックすると地図を表示します。</p>
           </div>
-          <div class="mapbox">
-            <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=%E6%B2%96%E7%B8%84%E7%9C%8C&output=embed"
-              title="店舗マップ"></iframe>
-          </div>
-          <div class="map-caption"><span>訪問済み店舗は一覧で緑表示</span><span>実地図は店舗選択時に切替</span></div>
+          <a class="pill" id="mapOpen" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C" target="_blank" rel="noopener"><span id="mapOpenLabel">Googleマップ ↗</span></a>
         </div>
+        <div class="mapbox">
+          <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=%E6%B2%96%E7%B8%84%E7%9C%8C&output=embed"
+            title="店舗マップ"></iframe>
+        </div>
+        <div class="map-caption"><span>訪問済み店舗は一覧で緑表示</span><span>実地図は店舗選択時に切替</span></div>
       </div>
     </section>
 
