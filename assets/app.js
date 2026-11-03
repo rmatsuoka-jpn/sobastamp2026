@@ -6,14 +6,26 @@ const visitedMap=()=>new Map(visits.map(v=>[v.storeId,v]));
 const fmtDate=d=>{if(!d)return"日程未確定";const x=new Date(d+"T00:00:00");return `${x.getMonth()+1}/${x.getDate()}`;};
 const storeById=id=>stores.find(s=>s.id===id);
 
-async function init(){
-  [stores,visits,schedule]=await Promise.all([
-    fetch("./data/stores.json").then(r=>r.json()),
-    fetch("./data/visits.json").then(r=>r.json()),
-    fetch("./data/schedule.json").then(r=>r.json())
-  ]);
+async function loadData(force=false){
+  const suffix=force?"?refresh="+Date.now():"";
+  const paths=["./data/stores.json","./data/visits.json","./data/schedule.json"];
+  const values=await Promise.all(paths.map(async p=>{
+    const response=await fetch(p+suffix,{cache:"no-store"});
+    if(!response.ok)throw new Error("データ取得失敗: "+p+" ("+response.status+")");
+    return response.json();
+  }));
+  [stores,visits,schedule]=values;
   renderAll();
+  // A selected route remains visible after a manual data refresh.
+  const focus=$("#routeFocus");
+  if(focus && !focus.hidden){
+    const routeId=focus.dataset.routeId;
+    const r=schedule.find(x=>x.id===routeId);
+    if(r)showRouteFocus(r);
+  }
 }
+async function init(){await loadData(true);}
+
 function renderAll(){
   const vm=visitedMap(),done=visits.length,remaining=EVENT.total-done,pct=Math.round(done/EVENT.total*100);
   $("#ring").style.setProperty("--p",pct);$("#ringPct").textContent=pct+"%";
@@ -100,6 +112,7 @@ function selectStore(id){
 function showRouteFocus(r){
   const vm=visitedMap();
   $("#routeFocus").hidden=false;
+  $("#routeFocus").dataset.routeId=r.id;
   $("#routeFocusTitle").textContent=r.id+" "+r.title;
   $("#routeFocusMeta").textContent=(r.date?fmtDate(r.date):r.window+"・日程未確定")+" / "+r.type;
   $("#routeStopList").innerHTML=r.storeIds.map((id,idx)=>{
@@ -140,6 +153,22 @@ function openPhoto(storeId){
 
 document.addEventListener("input",e=>{if(e.target.id==="storeSearch")renderStores(visitedMap())});
 document.addEventListener("click",e=>{
+  const refresh=e.target.closest("#refreshButton");
+  if(refresh){
+    if(refresh.disabled)return;
+    refresh.disabled=true;
+    const status=$("#refreshStatus");
+    status.textContent="更新中…";
+    status.classList.remove("refresh-error");
+    loadData(true).then(()=>{
+      status.textContent="最新の訪問データを読み込みました";
+    }).catch(err=>{
+      console.error(err);
+      status.textContent="更新できませんでした。通信状態をご確認ください。";
+      status.classList.add("refresh-error");
+    }).finally(()=>{refresh.disabled=false;});
+    return;
+  }
   const photo=e.target.closest("[data-photo-store]");
   if(photo){openPhoto(Number(photo.dataset.photoStore));return;}
   if(e.target.closest("#closePhoto")){$("#photoDialog").close();return;}
