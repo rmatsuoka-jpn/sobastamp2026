@@ -24,6 +24,18 @@
     "type": "訪問実績"
   },
   {
+    "id": "V03",
+    "order": -0.5,
+    "title": "単独訪問：美まる（那覇・三原）",
+    "window": "11月7日 訪問",
+    "date": "2026-11-07",
+    "storeIds": [
+      32
+    ],
+    "status": "completed",
+    "type": "訪問実績"
+  },
+  {
     "id": "R01",
     "order": 1,
     "title": "北部① 古宇利",
@@ -212,32 +224,20 @@
   {
     "id": "R15",
     "order": 15,
-    "title": "那覇③ 三原・古島",
+    "title": "那覇③ 古島・牧志・久茂地",
     "window": "2月前半",
     "date": null,
     "storeIds": [
-      32,
-      34
-    ],
-    "status": "planned",
-    "type": "半日・平日回収可"
-  },
-  {
-    "id": "R16",
-    "order": 16,
-    "title": "那覇④ 牧志・久茂地",
-    "window": "2月前半",
-    "date": null,
-    "storeIds": [
+      34,
       35,
       36
     ],
     "status": "planned",
-    "type": "半日・夜含む"
+    "type": "半日〜1日・夜含む"
   },
   {
-    "id": "R17",
-    "order": 17,
+    "id": "R16",
+    "order": 16,
     "title": "浦添① 内間・仲西",
     "window": "2月後半",
     "date": null,
@@ -249,8 +249,8 @@
     "type": "半日・平日回収可"
   },
   {
-    "id": "R18",
-    "order": 18,
+    "id": "R17",
+    "order": 17,
     "title": "浦添② 前田・大平・仲間",
     "window": "2月後半",
     "date": null,
