@@ -30,5 +30,13 @@
     "photos": [
       "images/visits/2026-10-09_miyoya.avif"
     ]
+  },
+  {
+    "storeId": 32,
+    "visitedDate": "2026-11-07",
+    "menu": "三枚肉そば",
+    "photos": [
+      "images/visits/2026-11-07_mimaru.avif"
+    ]
   }
 ]
