@@ -38,5 +38,13 @@
     "photos": [
       "images/visits/2026-11-07_mimaru.avif"
     ]
+  },
+  {
+    "storeId": 21,
+    "visitedDate": "2026-11-14",
+    "menu": "アーサーそば",
+    "photos": [
+      "images/visits/2026-11-14_sanchome.avif"
+    ]
   }
 ]
