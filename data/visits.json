@@ -46,5 +46,13 @@
     "photos": [
       "images/visits/2026-11-14_sanchome.avif"
     ]
+  },
+  {
+    "storeId": 8,
+    "visitedDate": "2026-11-20",
+    "menu": "沖縄そば",
+    "photos": [
+      "images/visits/2026-11-20_taiyo_midoricho.avif"
+    ]
   }
 ]
