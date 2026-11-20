@@ -48,6 +48,18 @@
     "type": "訪問実績"
   },
   {
+    "id": "V05",
+    "order": 0.5,
+    "title": "単独訪問：太陽 みどり町店（うるま）",
+    "window": "11月20日 訪問",
+    "date": "2026-11-20",
+    "storeIds": [
+      8
+    ],
+    "status": "completed",
+    "type": "訪問実績"
+  },
+  {
     "id": "R01",
     "order": 1,
     "title": "北部① 古宇利",
@@ -129,12 +141,11 @@
   {
     "id": "R07",
     "order": 7,
-    "title": "中北部① 宜野座・うるま",
+    "title": "中北部① 宜野座・うるま（残り2店舗）",
     "window": "12月前半",
     "date": null,
     "storeIds": [
       7,
-      8,
       9
     ],
     "status": "planned",
